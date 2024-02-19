@@ -79,7 +79,7 @@
 <div class="page-content pb-0 mb-0">
 <div class="card border" style="background-image: url(bg.webp); background-size: 168%;" data-card-height="cover">
     <div class="card-top" style="margin-left: 80%;margin-top: 20px;">
-   
+  
     <img id="userProfilePicture" width="40" height="40" src="" alt="Profile Picture">
 </div>
 <div class="card-center">
@@ -212,7 +212,7 @@ Install PayApp to your Home Screen to enjoy a unique and native experience.
                             set(ref(realtimeDb, `userSquads/${user.uid}/gameID`), gameID);
                             set(ref(realtimeDb, `userSquads/${user.uid}/selectedSquad`), selectedSquad);
                             alert("Squad selection submitted successfully!");
-                            window.location.href = "https://nabogaming.github.io/Nyumbani/";
+                            window.location.href = "newpage.html";
                         }
                     } else {
                         alert("Please enter game name and game ID before selecting a squad.");
@@ -224,7 +224,7 @@ Install PayApp to your Home Screen to enjoy a unique and native experience.
             const userSquadRef = ref(realtimeDb, `userSquads/${user.uid}`);
             const userSquadSnapshot = await get(child(userSquadRef, 'selectedSquad'));
             if (userSquadSnapshot.exists()) {
-                window.location.href = "https://nabogaming.github.io/Nyumbani/";
+                window.location.href = "newpage.html";
             }
         } else {
             // Handle if the user is not logged in
