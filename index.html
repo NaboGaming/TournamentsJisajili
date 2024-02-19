@@ -1,0 +1,176 @@
+<!DOCTYPE html><html lang="en"><head>
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>NaboGaming Tournaments</title>
+   <script defer type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
+    import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyC_VKdV-KsIzUiOb7jFLsYXdTsuGkLiS-Q",
+        authDomain: "register-71bde.firebaseapp.com",
+        projectId: "register-71bde",
+        storageBucket: "register-71bde.appspot.com",
+        messagingSenderId: "412548441298",
+        appId: "1:412548441298:web:e0fb2b6c5fbd4af7d0b90b"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const realtimeDb = getDatabase(app);
+
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            document.getElementById("userName").textContent = user.displayName;
+            document.getElementById("userEmail").textContent = user.email;
+            document.getElementById("userProfilePicture").src = user.photoURL;
+
+            const squadBtns = document.querySelectorAll(".squadBtn");
+            squadBtns.forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    const gameName = document.getElementById("gameName").value;
+                    const gameID = document.getElementById("gameID").value;
+                    if (gameName && gameID) {
+                        const selectedSquad = btn.id;
+                        const userSquadRef = ref(realtimeDb, `userSquads/${user.uid}`);
+                        const userSquadSnapshot = await get(child(userSquadRef, 'selectedSquad'));
+                        if (userSquadSnapshot.exists()) {
+                            alert("You have already submitted a squad selection.");
+                        } else {
+                            // Save game name and game ID
+                            set(ref(realtimeDb, `userSquads/${user.uid}/gameName`), gameName);
+                            set(ref(realtimeDb, `userSquads/${user.uid}/gameID`), gameID);
+                            set(ref(realtimeDb, `userSquads/${user.uid}/selectedSquad`), selectedSquad);
+                            alert("Squad selection submitted successfully!");
+                            window.location.href = "newpage.html";
+                        }
+                    } else {
+                        alert("Please enter game name and game ID before selecting a squad.");
+                    }
+                });
+            });
+
+            // Check if squad has already been submitted and redirect
+            const userSquadRef = ref(realtimeDb, `userSquads/${user.uid}`);
+            const userSquadSnapshot = await get(child(userSquadRef, 'selectedSquad'));
+            if (userSquadSnapshot.exists()) {
+                window.location.href = "newpage.html";
+            }
+        } else {
+            // Handle if the user is not logged in
+        }
+    });
+</script>
+<link rel="stylesheet" type="text/css" href="bootstrap.css">
+<link rel="stylesheet" type="text/css" href="bootstrap-icons.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@500;600;700&amp;family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="manifest" href="_manifest.json">
+<meta id="theme-check" name="theme-color" content="#121212">
+<link rel="apple-touch-icon" sizes="180x180" href="images/icon-192x192.png"></head>
+<body class="theme-dark">
+<div id="preloader"><div class="spinner-border color-highlight" role="status"></div></div>
+
+<div id="page">
+
+<div class="page-content pb-0 mb-0">
+<div class="card border" style="background-image: url(bg.webp); background-size: 168%;" data-card-height="cover">
+    <div class="card-top" style="margin-left: 80%;margin-top: 20px;">
+    <img src="profile.png" id="userProfilePicture" width="40" height="40">
+</div>
+<div class="card-center">
+<div class="bg-theme rounded-m px-3 py-4 mx-3 text-left ">
+<h1 class="font-28 mb-0">Habari,  <span id="userName"></span> Karibu NaboGaming Tournaments</h1>
+<p style="margin:0;padding:0;">Sehemu Pekee Iliyo Na Mashindano Kibao, Cheza Sasa Na Ushinde Zawadi Zisizo Na Kifani. Pata Bonus Na Ushinde Zaidi Ya Zawadi Yako.</p>
+<a href="#" data-bs-toggle="offcanvas" data-bs-target="#menu-login" style="background-image:url(bgbtn.png);background-size: 100%;"  class="btn btn-full shadow-bg shadow-bg-s mt-4">JIUNGE SASA</a>
+</div>
+</div>
+</div>
+<div class="card-overlay rounded-0 bg-black opacity-70"></div>
+</div>
+
+<div style="height:390px; width:320px;  background-color: #121212;" class="offcanvas offcanvas-modal rounded-m offcanvas-detached  py-3 px-3" id="menu-register">
+<h1 class="font-30 font-800 mb-0">Jaza Taarifa Sahihi </h1>
+<p>1. Jaza jina lako na id yako ya Pubg Mobile sahihi</p>
+<div class="form-custom border rounded-m form-label form-border form-icon mb-3 bg-transparent">
+<i class="bi bi-person font-13"></i>
+<input type="text" class="form-control rounded-xs" id="1c1" placeholder="Jina lako pubg">
+<label for="1c1" style="margin-top:-10px;color:#FF5124;" class="">JINA LAKO PUBG</label>
+<span>(Lazima Ujaze)</span>
+</div>
+<div class="form-custom form-label border rounded-m form-border form-icon mb-4 bg-transparent">
+<i class="bi bi-hash font-13"></i>
+<input type="number" class="form-control rounded-xs" id="1c2" placeholder="ID yako pubg">
+<label for="1c2" style="margin-top:-10px;color:#FF5124;" class="">ID YAKO PUBG</label>
+<span>(Lazima Ujaze)</span>
+</div>
+<p>2. Chagua Squad Mojawapo Na Ujiunge</p>
+<div class="row">
+    <div class="col-3">
+        <a href="#" style="padding: 7px;margin: 2px;border-radius: 10px;" class="btn color-white bg-black border squadBtn" id="squad1">Squad 01</a></div>
+       <div class="col-3">
+        <a href="#" style="padding: 7px;margin: 2px;border-radius: 10px;" class="btn color-white bg-black border squadBtn" id="squad2">Squad 02</a></div>    <div class="col-3">
+        <a href="#" style="padding: 7px;margin: 2px;border-radius: 10px;" class="btn color-white bg-black border squadBtn" id="squad3">Squad 03</a></div>    <div class="col-3">
+        <a href="#" style="padding: 7px;margin: 2px;border-radius: 10px;" class="btn color-white bg-black border squadBtn" id="squad4">Squad 04</a></div>
+</div>
+</div>
+<div style="height:280px; width:320px;" class="offcanvas offcanvas-modal rounded-m offcanvas-detached bg-theme py-3 px-3" id="menu-forgot">
+<h1 class="font-30 font-800 mb-0">PayApp</h1>
+<p>Recover your Account</p>
+<div class="form-custom form-label form-border form-icon mb-3 bg-transparent">
+<i class="bi bi-at font-16"></i>
+<input type="email" class="form-control rounded-xs" id="2c1" placeholder="Email Address">
+<label for="2c1" class="color-theme">Email Address</label>
+<span>(required)</span>
+</div>
+<a href="index.html" class="btn btn-full gradient-highlight shadow-bg shadow-bg-s mt-4">Send Recovery Instructions</a>
+<div class="row">
+<div class="col-6 text-start">
+<a href="#" data-bs-toggle="offcanvas" data-bs-target="#menu-register" class="font-11 color-theme opacity-40 pt-4 d-block">Create Account</a>
+</div>
+<div class="col-6 text-end">
+<a href="#" data-bs-toggle="offcanvas" data-bs-target="#menu-login" class="font-11 color-theme opacity-40 pt-4 d-block">Sign In Account</a>
+</div>
+</div>
+</div>
+<div style="height:350px; width:320px; background-color: white;" class="offcanvas offcanvas-modal rounded-m offcanvas-detached py-3 px-3" id="menu-login">
+<h1 class="font-30 font-800 mb-0 color-black">Maelezo Muhimu</h1>
+<br>
+<p class="font-300">Unaelekea Kujiunga Na Tournaments Zetu, Kama Tayari Umeshachagua Squad Tafadhali Subiri Utapelekwa Moja Kwa Moja Katika Squad Yako, Pia Zingatia Jambo Lolote Litalokuwepo Katika Squad Yako. NaboGaming Inakutakia Ushindi Mwema.</p>
+<div style="margin-top: -20px;" class="form-check form-check-custom">
+<input class="form-check-input" type="checkbox" name="type" value="" id="3c2a">
+<label class="form-check-label" style="font-size: 10px;" for="3c2a">Nimekubaliana Na <a href="#"> Sheria, Taratibu Na Kanuni </a> Za NaboGaming BetPlace.</label>
+<i class="is-checked font-10 bi bi-check-circle-fill" style="color:#FF5124;" ></i>
+<i class="is-unchecked font-10 bi bi-circle" style="color:#FF5124;"></i>
+</div>
+<a href="#" data-bs-toggle="offcanvas" data-bs-target="#menu-register" style="background-image:url(bgbtn.png);background-size: 100%;"  class="btn btn-full shadow-bg shadow-bg-s mt-4">CHAGUA SQUAD YAKO</a>
+</div>
+<div class="offcanvas offcanvas-bottom rounded-m offcanvas-detached" id="menu-install-pwa-ios">
+<div class="content">
+<img src="images/icon-128x128.png" alt="img" width="80" class="rounded-m mx-auto my-4">
+<h1 class="text-center">Install PayApp</h1>
+<p class="boxed-text-xl">
+Install PayApp on your home screen, and access it just like a regular app. Open your Safari menu and tap "Add to Home Screen".
+</p>
+<a href="#" class="pwa-dismiss close-menu color-theme text-uppercase font-900 opacity-50 font-11 text-center d-block mt-n2" data-bs-dismiss="offcanvas">Maybe Later</a>
+</div>
+</div>
+<div class="offcanvas offcanvas-bottom rounded-m offcanvas-detached" id="menu-install-pwa-android">
+<div class="content">
+<img src="images/icon-128x128.png" alt="img" width="80" class="rounded-m mx-auto my-4">
+<h1 class="text-center">Install PayApp</h1>
+<p class="boxed-text-l">
+Install PayApp to your Home Screen to enjoy a unique and native experience.
+</p>
+<a href="#" class="pwa-install btn btn-m rounded-s text-uppercase font-900 gradient-highlight shadow-bg shadow-bg-s btn-full">Add to Home Screen</a><br>
+<a href="#" data-bs-dismiss="offcanvas" class="pwa-dismiss close-menu color-theme text-uppercase font-900 opacity-60 font-11 text-center d-block mt-n1">Maybe later</a>
+</div>
+</div>
+</div>
+
+<script src="bootstrap.min.js"></script>
+<script src="custom.js"></script>
+</body></html>
