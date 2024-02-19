@@ -45,7 +45,7 @@
                             set(ref(realtimeDb, `userSquads/${user.uid}/gameID`), gameID);
                             set(ref(realtimeDb, `userSquads/${user.uid}/selectedSquad`), selectedSquad);
                             alert("Squad selection submitted successfully!");
-                            window.location.href = "newpage.html";
+                            window.location.href = "https://nabogaming.github.io/Nyumbani/";
                         }
                     } else {
                         alert("Please enter game name and game ID before selecting a squad.");
@@ -57,7 +57,7 @@
             const userSquadRef = ref(realtimeDb, `userSquads/${user.uid}`);
             const userSquadSnapshot = await get(child(userSquadRef, 'selectedSquad'));
             if (userSquadSnapshot.exists()) {
-                window.location.href = "newpage.html";
+                window.location.href = "https://nabogaming.github.io/Nyumbani/";
             }
         } else {
             // Handle if the user is not logged in
