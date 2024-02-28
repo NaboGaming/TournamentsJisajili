@@ -6,10 +6,20 @@
 <title>NaboGaming Tournaments</title>
 <link rel="stylesheet" type="text/css" href="bootstrap.css">
 <link rel="stylesheet" type="text/css" href="bootstrap-icons.css">
+<style>
+    .squadBtn{
+        cursor: pointer;background-color: black;
+  transition: background 0.5s ease-in-out;
+        padding: 7px;margin: 2px;border-radius: 10px;
+    }
+    .squadBtn:hover{
+        background:#9900FF;
+    }
+</style>
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@500;600;700&amp;family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">
 <link rel="manifest" href="_manifest.json">
-<meta id="theme-check" name="theme-color" content="#121212">
+<meta id="theme-check" name="theme-color" content="#9900FF">
 <link rel="apple-touch-icon" sizes="180x180" href="images/icon-192x192.png"></head>
 <body class="theme-dark">
 <div id="preloader"><div class="spinner-border color-highlight" role="status"></div></div>
@@ -25,15 +35,15 @@
 <div class="card-center">
 <div class="bg-theme rounded-m px-3 py-4 mx-3 text-left ">
 <h1 class="font-28 mb-0">Habari,  <span id="userName"></span> Karibu NaboGaming Tournaments</h1>
-<p style="margin:0;padding:0;">Sehemu Pekee Iliyo Na Mashindano Kibao, Cheza Sasa Na Ushinde Zawadi Zisizo Na Kifani. Pata Bonus Na Ushinde Zaidi Ya Zawadi Yako.</p>
-<a href="#" data-bs-toggle="offcanvas" data-bs-target="#menu-login" style="background-image:url(bgbtn.png);background-size: 100%;"  class="btn btn-full shadow-bg shadow-bg-s mt-4">JIUNGE SASA</a>
+<p style="margin:0;padding:0;">Sehemu Pekee Iliyo Na Mashindano Kibao, Cheza Sasa Na Ushinde Zawadi Zisizo Na Kifani. <strong style="color: #9900FF;">#Pata Bonus </strong>Na Ushinde Zaidi Ya Zawadi Yako.</p>
+<a href="#" data-bs-toggle="offcanvas" data-bs-target="#menu-login" style="background:#9900FF;"  class="btn btn-full">JIUNGE SASA</a>
 </div>
 </div>
 </div>
 <div class="card-overlay rounded-0 bg-black opacity-70"></div>
 </div>
 
-<div style="height:390px; width:320px;  background-color: #121212;" class="offcanvas offcanvas-modal rounded-m offcanvas-detached  py-3 px-3" id="menu-register">
+<div style="height:390px; width:320px;  background:linear-gradient(to bottom  ,#121212,#121212,#121212,#9900FF);" class="offcanvas offcanvas-modal rounded-m offcanvas-detached  py-3 px-3" id="menu-register">
 <h1 class="font-30 font-800 mb-0">Jaza Taarifa Sahihi </h1>
 <p>1. Jaza jina lako na id yako ya Pubg Mobile sahihi</p>
 <div class="form-custom border rounded-m form-label form-border form-icon mb-3 bg-transparent">
@@ -51,11 +61,13 @@
 <p>2. Chagua Squad Mojawapo Na Ujiunge</p>
 <div class="row">
     <div class="col-3">
-        <a href="#" style="padding: 7px;margin: 2px;border-radius: 10px;" class="btn color-white bg-black border squadBtn" id="squad1">Squad 01</a></div>
-       <div class="col-3">
-        <a href="#" style="padding: 7px;margin: 2px;border-radius: 10px;" class="btn color-white bg-black border squadBtn" id="squad2">Squad 02</a></div>    <div class="col-3">
-        <a href="#" style="padding: 7px;margin: 2px;border-radius: 10px;" class="btn color-white bg-black border squadBtn" id="squad3">Squad 03</a></div>    <div class="col-3">
-        <a href="#" style="padding: 7px;margin: 2px;border-radius: 10px;" class="btn color-white bg-black border squadBtn" id="squad4">Squad 04</a></div>
+        <a href="#" class="btn squadBtn" id="squad1">Squad 01</a></div>
+   <div class="col-3">
+        <a href="#" class="btn squadBtn" id="squad2">Squad 02</a></div>
+   <div class="col-3">
+      <a href="#" class="btn squadBtn" id="squad3">Squad 03</a></div>
+   <div class="col-3">
+        <a href="#" class="btn squadBtn" id="squad4">Squad 04</a></div>
 </div>
 </div>
 <div style="height:280px; width:320px;" class="offcanvas offcanvas-modal rounded-m offcanvas-detached bg-theme py-3 px-3" id="menu-forgot">
@@ -77,19 +89,17 @@
 </div>
 </div>
 </div>
-<div style="height:350px; width:320px; background-color: white;" class="offcanvas offcanvas-modal rounded-m offcanvas-detached py-3 px-3" id="menu-login">
-<h1 class="font-30 font-800 mb-0 color-black">Maelezo Muhimu</h1>
-<br>
+<div style="height:350px; width:320px;background:linear-gradient(to bottom  ,#121212,#121212,#121212,#9900FF);"class="offcanvas offcanvas-modal rounded-m offcanvas-detached py-3 px-3" id="menu-login">
+<h1 class="font-30 font-800 mb-0 color-white">Maelezo Muhimu</h1>
 <p class="font-300">Unaelekea Kujiunga Na Tournaments Zetu, Kama Tayari Umeshachagua Squad Tafadhali Subiri Utapelekwa Moja Kwa Moja Katika Squad Yako, Pia Zingatia Jambo Lolote Litalokuwepo Katika Squad Yako. NaboGaming Inakutakia Ushindi Mwema.</p>
 <div style="margin-top: -20px;" class="form-check form-check-custom">
 <input class="form-check-input" type="checkbox" name="type" value="" id="3c2a">
-<label class="form-check-label" style="font-size: 10px;" for="3c2a">Nimekubaliana Na <a href="https://nabogaming.github.io/FAQ/"> Sheria, Taratibu Na Kanuni </a> Za NaboGaming BetPlace.</label>
-<i class="is-checked font-10 bi bi-check-circle-fill" style="color:#FF5124;" ></i>
-<i class="is-unchecked font-10 bi bi-circle" style="color:#FF5124;"></i>
+<label class="form-check-label" style="font-size: 10px;" for="3c2a">Nimekubaliana Na <a href="https://nabogaming.github.io/FAQ/" style="color:#9900FF;"> Sheria, Taratibu Na Kanuni </a> Za NaboGaming BetPlace.</label>
+<i class="is-checked font-10 bi bi-check-circle-fill" style="color:#9900FF;" ></i>
+<i class="is-unchecked font-10 bi bi-circle" style="color:#9900FF;"></i>
 </div>
-<a href="#" data-bs-toggle="offcanvas" data-bs-target="#menu-register" style="background-image:url(bgbtn.png);background-size: 100%;"  class="btn btn-full shadow-bg shadow-bg-s mt-4">CHAGUA SQUAD YAKO</a>
+<a href="#" data-bs-toggle="offcanvas" data-bs-target="#menu-register" style="background:#9900FF;"  class="btn btn-full shadow-bg shadow-bg-s mt-4">CHAGUA SQUAD YAKO</a>
 </div>
-
    <script defer type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
